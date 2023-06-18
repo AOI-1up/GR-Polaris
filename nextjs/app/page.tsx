@@ -1,8 +1,9 @@
 import { NextPage } from "next"
+import './globals.css'
 
 const Home: NextPage = () => {
   return (
-    <h1>Hello, Polaris</h1>
+    <div className="text-red-500">Hello, Polaris</div>
   )
 }
 

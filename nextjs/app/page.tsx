@@ -11,7 +11,7 @@ const Home: NextPage = () => {
         <div className="min-w-[250px] border border-blue-500 bg-blue-100 text-blue-700">
           右バー
         </div>
-        <main>
+        <main className="w-full">
           <MainCanvas />
         </main>
         <div className="min-w-[250px] border border-yellow-500 bg-yellow-100 text-yellow-700">

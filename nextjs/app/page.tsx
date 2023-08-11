@@ -1,24 +1,17 @@
 import { NextPage } from "next";
-import { MainCanvas } from "../components/MainCanvas";
+import { DrawCanvas } from "../components/DrawCanvas";
+import { Sidebar } from "../components/Sidebar"
 
 const Home: NextPage = () => {
   return (
-    <div className="flex flex-col w-screen h-screen overflow-x-hidden">
-      <header className="w-full h-[50px] bg-[#9370DB]">
-        <div className="font-bold text-white text-2xl">ヘッダー</div>
-      </header>
-      <div className="flex w-full h-full">
-        <div className="min-w-[250px] border border-blue-500 bg-blue-100 text-blue-700">
-          右バー
-        </div>
-        <main className="w-full">
-          <MainCanvas />
-        </main>
-        <div className="min-w-[250px] border border-yellow-500 bg-yellow-100 text-yellow-700">
-          左バー
-        </div>
+    <>
+      <div className="flex justify-center px-[10px] bg-red-500">
+        <DrawCanvas />
       </div>
-    </div>
+      <div className="fixed top-0 left-0 h-screen">
+        <Sidebar />
+      </div>
+    </>
   );
 };
 

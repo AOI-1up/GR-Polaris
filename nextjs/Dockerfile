@@ -4,5 +4,3 @@ WORKDIR /nextjs
 
 COPY package*.json ./
 RUN npm ci
-
-CMD ["npm", "run", "dev"]

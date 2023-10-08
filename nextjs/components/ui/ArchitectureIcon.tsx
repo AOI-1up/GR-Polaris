@@ -1,14 +1,19 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAtomValue } from "jotai";
+import { CanvasElement } from "../atom/CanvasElement";
 
 interface Props {
-  src: string;
-  place: any;
+  func: (object: object) => void;
+  width: number;
+  height: number;
+  path: string;
 }
 
 export const ArchitectureIcon = (props: Props) => {
   const [showDraggedElement, setShowDraggedElement] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const CanvasElementArray = useAtomValue(CanvasElement);
 
   const handleMouseDown = () => {
     // イベントリスナーを追加
@@ -26,9 +31,16 @@ export const ArchitectureIcon = (props: Props) => {
     // ドラッグ要素を非表示
     setShowDraggedElement(false);
 
-    // Canvas に要素を貼り付け
-    const newPosition = { x: event.clientX - 200, y: event.clientY - 50 };
-    props.place(newPosition.x, newPosition.y, props.src);
+    // Jotai に Canvas 要素を追加
+    const newCanvasElement = {
+      id: CanvasElementArray[CanvasElementArray.length - 1].id + 1,
+      x: event.clientX,
+      y: event.clientY,
+      width: props.width,
+      height: props.height,
+      src: props.path,
+    };
+    props.func(newCanvasElement);
 
     // イベントリスナーを削除
     window.removeEventListener("mousemove", handleMouseMove);
@@ -43,7 +55,7 @@ export const ArchitectureIcon = (props: Props) => {
           onMouseDown={handleMouseDown}
         >
           <Image
-            src={props.src}
+            src={props.path}
             className="pointer-events-none"
             width={35}
             height={35}
@@ -53,14 +65,14 @@ export const ArchitectureIcon = (props: Props) => {
         </div>
         {showDraggedElement && (
           <Image
-            src={props.src}
+            src={props.path}
             className="pointer-events-none opacity-50"
-            width={80}
-            height={80}
+            width={props.width}
+            height={props.height}
             style={{
-              position: "absolute",
+              position: "fixed",
               left: position.x + "px",
-              top: position.y - 50 + "px",
+              top: position.y + "px",
             }}
             alt=""
             priority

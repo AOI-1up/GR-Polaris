@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 import {
   Accordion,
@@ -8,7 +7,7 @@ import {
 import { ArchitectureIcon } from "./ArchitectureIcon";
 
 interface Props {
-  place: any;
+  func: (object: object) => void;
 }
 
 const Icon = ({ id, open }: { id: number; open: number }) => {
@@ -19,9 +18,8 @@ const Icon = ({ id, open }: { id: number; open: number }) => {
       viewBox="0 0 24 24"
       strokeWidth={2}
       stroke="currentColor"
-      className={`${
-        id === open ? "rotate-180" : ""
-      } h-5 w-5 transition-transform`}
+      className={`${id === open ? "rotate-180" : ""
+        } h-5 w-5 transition-transform`}
     >
       <path
         strokeLinecap="round"
@@ -32,7 +30,7 @@ const Icon = ({ id, open }: { id: number; open: number }) => {
   );
 };
 
-export const Computing = (props: Props) => {
+export const Compute = (props: Props) => {
   const [open, setOpen] = useState(0);
 
   const handleOpen = (value: number) => setOpen(open === value ? 0 : value);
@@ -46,12 +44,23 @@ export const Computing = (props: Props) => {
       >
         <AccordionHeader
           onClick={() => handleOpen(1)}
-          className="h-[40px] border-b-2 border-gray-300 px-4 py-2 font-sans font-bold text-sm"
+          className="h-[40px] border-b-[1px] border-gray-300 px-4 py-2 font-sans font-bold text-sm"
         >
-          Computing
+          Compute
         </AccordionHeader>
-        <AccordionBody className="w-full flex flex-wrap items-center px-2 py-1">
-          <ArchitectureIcon src="./AWS/computing/ec2.svg" place={props.place} />
+        <AccordionBody className="w-full flex flex-wrap items-center border-b-[1px] border-gray-300 px-2 py-1">
+          <ArchitectureIcon
+            func={props.func}
+            path="/AWS/compute/ec2.svg"
+            width={80}
+            height={80}
+          />
+          <ArchitectureIcon
+            func={props.func}
+            path="/AWS/groups/region.png"
+            width={80}
+            height={80}
+          />
         </AccordionBody>
       </Accordion>
     </>

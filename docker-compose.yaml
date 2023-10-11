@@ -11,25 +11,15 @@ services:
     tty: true
     init: true
 
-  gin:
-    build:
-      context: ./gin
+  terraform:
+    image: hashicorp/terraform:1.4
     volumes:
-      - ./gin:/gin
-    ports:
-      - 8080:8080
+      - ./terraform:/terraform
+    entrypoint: ash
     tty: true
     init: true
-
-  # terraform:
-  #   image: hashicorp/terraform:1.4
-  #   volumes:
-  #     - ./terraform:/terraform
-  #   entrypoint: ash
-  #   tty: true
-  #   init: true
-  #   env_file:
-  #     - .env
+    env_file:
+      - .env
 
 volumes:
   node_modules:

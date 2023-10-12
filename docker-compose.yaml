@@ -18,6 +18,8 @@ services:
     entrypoint: ash
     tty: true
     init: true
+    env_file:
+      - .env
 
 volumes:
   node_modules:

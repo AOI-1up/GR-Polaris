@@ -8,6 +8,7 @@ interface Props {
   width: number;
   height: number;
   path: string;
+  service: string;
 }
 
 export const ArchitectureIcon = (props: Props) => {
@@ -34,12 +35,30 @@ export const ArchitectureIcon = (props: Props) => {
     // Jotai に Canvas 要素を追加
     const newCanvasElement = {
       id: CanvasElementArray[CanvasElementArray.length - 1].id + 1,
+      service: props.service,
       x: event.clientX,
       y: event.clientY,
       width: props.width,
       height: props.height,
       src: props.path,
+      show: false,
+      resources: {},
     };
+    if (props.service === "EC2") {
+      newCanvasElement.resources = {
+        ami: "ami-0bcf3ca5a6483feba",
+        instance_type: "t2.micro",
+        availability_zone: "ap-northeast-1a",
+        subnet_id: "",
+        root_block_device: {
+          volume_type: "gp3",
+          volume_size: "8",
+        },
+        tags: {
+          Name: `${newCanvasElement.service}-${String(newCanvasElement.id)}`,
+        },
+      };
+    }
     props.func(newCanvasElement);
 
     // イベントリスナーを削除

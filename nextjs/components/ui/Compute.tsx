@@ -18,8 +18,9 @@ const Icon = ({ id, open }: { id: number; open: number }) => {
       viewBox="0 0 24 24"
       strokeWidth={2}
       stroke="currentColor"
-      className={`${id === open ? "rotate-180" : ""
-        } h-5 w-5 transition-transform`}
+      className={`${
+        id === open ? "rotate-180" : ""
+      } h-5 w-5 transition-transform`}
     >
       <path
         strokeLinecap="round"
@@ -54,12 +55,7 @@ export const Compute = (props: Props) => {
             path="/AWS/compute/ec2.svg"
             width={80}
             height={80}
-          />
-          <ArchitectureIcon
-            func={props.func}
-            path="/AWS/groups/region.png"
-            width={80}
-            height={80}
+            service="EC2"
           />
         </AccordionBody>
       </Accordion>

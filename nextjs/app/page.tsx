@@ -80,8 +80,8 @@ const Home: NextPage = () => {
     setCanvasElementArray((prevArray) => [...prevArray, newCanvasElement]);
   };
 
-  /* Canvas 内の要素を動かす */
-  const moveCanvasElement = (x: number, y: number) => {
+  /* Canvas 内の要素を変更する */
+  const changeCanvasElement = (x: number, y: number) => {
     const { canvas, context } = useCanvasContext();
     if (!canvas || !context) return;
 
@@ -93,11 +93,18 @@ const Home: NextPage = () => {
         y >= canvasElement.y && y <= canvasElement.y + canvasElement.height;
 
       if (withinX && withinY) {
-        const { x, y, width, height, id } = canvasElement;
-        context.clearRect(x, y, width, height);
-        setCanvasElementArray((prevArray) =>
-          prevArray.filter((element) => element.id !== id)
-        );
+        for (let i = 0; i < canvasElementArray.length; i++) {
+          const canvasElement = canvasElementArray[i];
+          canvasElement.show = false;
+        }
+        canvasElement.show = true;
+
+        // 削除処理
+        // context.clearRect(x, y, width, height);
+        // setCanvasElementArray((prevArray) =>
+        //   prevArray.filter((element) => element.id !== id)
+        // );
+
         break;
       }
     }
@@ -120,7 +127,7 @@ const Home: NextPage = () => {
             <canvas
               ref={canvasRef}
               onMouseDown={() => {
-                moveCanvasElement(position.x, position.y);
+                changeCanvasElement(position.x, position.y);
               }}
             />
           </div>

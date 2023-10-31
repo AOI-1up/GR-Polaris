@@ -7,8 +7,8 @@ interface Props {
 export const Nav = (props: Props) => {
   return (
     <>
-      <div className="w-[200px] h-full flex flex-col select-none bg-gray-50 border-r-2 border-gray-300">
-        <Compute func={props.func}/>
+      <div className="w-[270px] h-full flex flex-col select-none bg-gray-50 border-r-2 border-gray-300">
+        <Compute func={props.func} />
       </div>
     </>
   );
